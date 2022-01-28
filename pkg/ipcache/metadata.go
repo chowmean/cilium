@@ -73,6 +73,12 @@ func GetIDMetadataByIP(prefix string) labels.Labels {
 	return identityMetadata[prefix]
 }
 
+func GetIDMetadata() map[string]labels.Labels {
+	idMDMU.RLock()
+	defer idMDMU.RUnlock()
+	return identityMetadata
+}
+
 // InjectLabels injects labels from the identityMetadata (IDMD) map into the
 // identities used for the prefixes in the IPCache. The given source is the
 // source of the caller, as inserting into the IPCache requires knowing where
